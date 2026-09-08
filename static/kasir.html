@@ -35,7 +35,7 @@ small{color:#98a2b3}
 <div class="card">
 <div id="formView">
 <div class="logo">Pay<span>pan</span> Kasir</div>
-<div class="sub">Buat tagihan QRIS</div>
+<div class="sub">Buat tagihan QRIS · by JhopanStore</div>
 <label>Nominal tagihan (Rp)</label>
 <input type="number" id="price" inputmode="numeric" placeholder="0" min="1" max="9000000" autofocus>
 <div class="hint">Kode unik 1-999 akan ditambahkan otomatis agar bisa dicocokkan</div>
@@ -58,18 +58,19 @@ small{color:#98a2b3}
 </div>
 
 <script>
-const API = location.origin;
+const API = '';            // same-origin
+const AUTH = 'session';    // admin session cookie
 function rp(n){ return 'Rp ' + Number(n).toLocaleString('id-ID'); }
-
 async function buat(){
   const price = parseInt(document.getElementById('price').value, 10);
   if(!price || price < 1){ alert('Isi nominal dulu'); return; }
   const btn = document.getElementById('btn');
   btn.disabled = true; btn.textContent = 'Memproses...';
   try{
-    const res = await fetch(API + '/api/order', {
+    const res = await fetch(API + '/api/kasir/order', {
       method:'POST',
-      headers:{'Authorization':'Bearer paypan-secret-2026','Content-Type':'application/json'},
+      headers:{'Content-Type':'application/json'},
+      credentials:'same-origin',
       body: JSON.stringify({price: price, label:'kasir'})
     });
     const j = await res.json();

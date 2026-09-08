@@ -80,3 +80,11 @@ assert hmac.compare_digest(expected, request.headers["X-Paypan-Signature"])
 
 ## Lisensi
 MIT
+
+---
+
+## Kredit
+
+**Dikembangkan oleh [JhopanStore](https://github.com/jhopan)**
+
+© 2026 JhopanStore. Dibangun dengan bantuan AI (Hermes Agent).
